@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   
+  // Build output directory for Netlify
+  distDir: 'dist',
+  
   // Image optimization for Netlify
   images: {
     unoptimized: true,

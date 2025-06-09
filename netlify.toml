@@ -2,6 +2,9 @@
   # Build command for Next.js
   command = "npm run build"
   
+  # Publish directory (Next.js builds to dist with distDir config)
+  publish = "dist"
+  
   # Node.js version
   environment = { NODE_VERSION = "20" }
 
