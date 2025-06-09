@@ -2,35 +2,27 @@ import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit
 import { verify } from '../api/verify'
 import { useVerification } from '../utils/VerificationContext'
 
-interface WorldIDVerificationProps {
-  onSuccess?: (result: ISuccessResult) => void;
-  onError?: (error: Error | string) => void;
-}
-
-export default function WorldIDVerification({ onSuccess, onError }: WorldIDVerificationProps) {
+const WorldIDVerification = () => {
   const { setVerified } = useVerification()
 
   const handleVerify = async (proof: ISuccessResult) => {
-    try {
-      const response = await verify(proof);
-      if (response.success) {
-        console.log('World ID verification successful!');
-        setVerified(proof); // Store verification in context
-        onSuccess?.(proof);
-      } else {
-        console.error('World ID verification failed:', response.error);
-        onError?.(typeof response.error === 'string' ? response.error : 'Verification failed');
-      }
-    } catch (error) {
-      console.error('Verification error:', error);
-      onError?.(error instanceof Error ? error : String(error));
+    const result = await verify(proof)
+    if (result.success) {
+      console.log('Verification successful!')
+      return Promise.resolve()
+    } else {
+      throw new Error('Verification failed')
     }
-  };
+  }
 
   const handleSuccess = (result: ISuccessResult) => {
-    setVerified(result); // Store verification in context
-    onSuccess?.(result);
-  };
+    console.log('World ID verification successful:', result)
+    setVerified(result)
+  }
+
+  const onError = (error: any) => {
+    console.error('World ID verification error:', error)
+  }
 
   return (
     <IDKitWidget
@@ -38,16 +30,23 @@ export default function WorldIDVerification({ onSuccess, onError }: WorldIDVerif
       action={import.meta.env.VITE_PUBLIC_WLD_ACTION!} // Your action identifier
       onSuccess={handleSuccess}
       handleVerify={handleVerify}
-      verification_level={VerificationLevel.Orb} // or VerificationLevel.Device for testing
+      verification_level={VerificationLevel.Device}
+      onError={onError}
     >
       {({ open }) => (
         <button 
           onClick={open}
-          className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+          className="group relative bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/30 border border-red-500/50"
         >
-          Verify with World ID
+          <span className="relative z-10 flex items-center">
+            <span className="mr-2">🌍</span>
+            Verify with World ID
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
         </button>
       )}
     </IDKitWidget>
-  );
-} 
+  )
+}
+
+export default WorldIDVerification 
