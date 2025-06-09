@@ -10,6 +10,9 @@ const nextConfig = {
     unoptimized: true,
   },
   
+  // Ensure trailing slash consistency
+  trailingSlash: false,
+  
   // Custom webpack config if needed
   webpack: (config) => {
     return config;
