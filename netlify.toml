@@ -2,8 +2,8 @@
   # Build command for Next.js
   command = "npm run build"
   
-  # Publish directory (Next.js builds to dist with distDir config)
-  publish = "dist"
+  # Use default Next.js output directory (.next) instead of custom dist
+  # publish = "dist"
   
   # Node.js version
   environment = { NODE_VERSION = "20" }
@@ -13,7 +13,7 @@
   package = "@netlify/plugin-nextjs"
 
 [build.processing]
-  # Let Next.js handle optimization for static export
+  # Let Next.js handle optimization
   skip_processing = false
 
 [build.processing.css]
@@ -29,8 +29,6 @@
 [build.processing.html]
   # Let Next.js handle HTML optimization
   pretty_urls = true
-
-# Next.js redirects handled by the plugin
 
 # Security headers
 [[headers]]
@@ -67,12 +65,6 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
-  
-# Ensure API routes work properly
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
 
 # Form handling (if you add contact forms later)
 [forms]

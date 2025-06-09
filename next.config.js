@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   
-  // Build output directory for Netlify
-  distDir: 'dist',
+  // Remove distDir for Netlify Functions support
+  // distDir: 'dist', // This prevents API routes from working
   
   // Image optimization for Netlify
   images: {
