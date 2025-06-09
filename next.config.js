@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    // Enable experimental features if needed
-  },
-  // Configure for static export if needed for deployment
-  // output: 'export',
-  // trailingSlash: true,
   
-  // Image optimization
+  // Image optimization for Netlify
   images: {
-    unoptimized: false,
+    unoptimized: true, // Required for static export
   },
   
   // Custom webpack config if needed

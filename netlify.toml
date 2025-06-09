@@ -1,12 +1,13 @@
 [build]
-  # Build command
+  # Build command for Next.js
   command = "npm run build"
-  
-  # Directory to publish (Vite builds to 'dist' by default)
-  publish = "dist"
   
   # Node.js version
   environment = { NODE_VERSION = "20" }
+
+# Netlify Next.js plugin
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.processing]
   # Skip processing of images, CSS, and JS (Vite already optimizes these)
@@ -26,11 +27,8 @@
   # Let Vite handle HTML optimization
   pretty_urls = true
 
-# SPA (Single Page Application) redirect rules
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Next.js redirect rules (handled by Next.js itself)
+# No manual redirects needed for Next.js
 
 # Security headers
 [[headers]]
@@ -45,40 +43,22 @@
     # Performance headers
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache static assets for longer
+# Cache Next.js static assets
 [[headers]]
-  for = "/assets/*"
+  for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache HTML files for shorter time
+# Cache images and other static files
 [[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=3600"
-
-# Cache CSS and JS files
-[[headers]]
-  for = "/*.css"
+  for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Preload critical resources
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Link = "</assets/index.css>; rel=preload; as=style, </assets/index.js>; rel=preload; as=script"
 
 # Development settings (for Netlify Dev)
 [dev]
   command = "npm run dev"
-  port = 5173
-  publish = "dist"
+  port = 3000
   autoLaunch = false
 
 # Functions settings (if you add serverless functions later)
