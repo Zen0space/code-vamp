@@ -1,10 +1,16 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
-import { ISuccessResult } from '@worldcoin/idkit'
+
+interface VerificationResult {
+  merkle_root: string
+  nullifier_hash: string
+  proof: string
+  verification_level: string | any
+}
 
 interface VerificationState {
   isVerified: boolean
-  verificationData: ISuccessResult | null
-  setVerified: (data: ISuccessResult) => void
+  verificationData: VerificationResult | null
+  setVerified: (data: VerificationResult) => void
   clearVerification: () => void
 }
 
@@ -12,9 +18,9 @@ const VerificationContext = createContext<VerificationState | undefined>(undefin
 
 export function VerificationProvider({ children }: { children: ReactNode }) {
   const [isVerified, setIsVerified] = useState(false)
-  const [verificationData, setVerificationData] = useState<ISuccessResult | null>(null)
+  const [verificationData, setVerificationData] = useState<VerificationResult | null>(null)
 
-  const setVerified = (data: ISuccessResult) => {
+  const setVerified = (data: VerificationResult) => {
     setIsVerified(true)
     setVerificationData(data)
     // Store in localStorage for persistence across page reloads
