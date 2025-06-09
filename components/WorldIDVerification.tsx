@@ -3,7 +3,7 @@ import { verify } from '../utils/verify'
 
 interface WorldIDVerificationProps {
   onSuccess?: (result: ISuccessResult) => void;
-  onError?: (error: any) => void;
+  onError?: (error: Error | string) => void;
 }
 
 export default function WorldIDVerification({ onSuccess, onError }: WorldIDVerificationProps) {
@@ -15,11 +15,11 @@ export default function WorldIDVerification({ onSuccess, onError }: WorldIDVerif
         onSuccess?.(proof);
       } else {
         console.error('World ID verification failed:', response.error);
-        onError?.(response.error);
+        onError?.(typeof response.error === 'string' ? response.error : 'Verification failed');
       }
     } catch (error) {
       console.error('Verification error:', error);
-      onError?.(error);
+      onError?.(error instanceof Error ? error : String(error));
     }
   };
 

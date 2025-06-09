@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IVerifyResponse, verifyCloudProof } from '@worldcoin/idkit'
+import { verifyCloudProof } from '@worldcoin/idkit'
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { proof, merkle_root, nullifier_hash, verification_level } = req.body
+  const { proof } = req.body
 
   try {
     const app_id = process.env.NEXT_PUBLIC_WLD_APP_ID!
