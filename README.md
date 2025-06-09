@@ -84,3 +84,4 @@ This is a landing page template. Feel free to customize and extend it for your o
 **Made with ❤️ and lots of coffee** ☕
 
 *Transform your coding skills with the hunger of a vampire!* 🧛‍♂️
+s
