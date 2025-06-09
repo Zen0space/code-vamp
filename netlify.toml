@@ -11,10 +11,6 @@
 # Netlify Next.js plugin for full Next.js support including API routes
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  
-  [plugins.inputs]
-    # Ensure API routes are handled as serverless functions
-    includeRobotsTxt = false
 
 # Security headers
 [[headers]]
