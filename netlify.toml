@@ -5,30 +5,29 @@
   # Node.js version
   environment = { NODE_VERSION = "20" }
 
-# Netlify Next.js plugin
+# Netlify Next.js plugin for API routes support
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [build.processing]
-  # Skip processing of images, CSS, and JS (Vite already optimizes these)
+  # Let Next.js handle optimization for static export
   skip_processing = false
 
 [build.processing.css]
-  # Let Vite handle CSS optimization
+  # Let Next.js handle CSS optimization
   bundle = false
   minify = false
 
 [build.processing.js]
-  # Let Vite handle JS optimization  
+  # Let Next.js handle JS optimization  
   bundle = false
   minify = false
 
 [build.processing.html]
-  # Let Vite handle HTML optimization
+  # Let Next.js handle HTML optimization
   pretty_urls = true
 
-# Next.js redirect rules (handled by Next.js itself)
-# No manual redirects needed for Next.js
+# Next.js redirects handled by the plugin
 
 # Security headers
 [[headers]]

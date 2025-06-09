@@ -4,7 +4,7 @@ const nextConfig = {
   
   // Image optimization for Netlify
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
   
   // Custom webpack config if needed
