@@ -18,12 +18,7 @@ export default async function handler(
     const verifyRes = await verifyCloudProof(
       proof,
       app_id as `app_${string}`,
-      action,
-      {
-        merkle_root,
-        nullifier_hash,
-        verification_level,
-      }
+      action
     )
 
     if (verifyRes.success) {
