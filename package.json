@@ -13,6 +13,7 @@
     "@netlify/plugin-nextjs": "^5.11.2",
     "@next/eslint-plugin-next": "^15.3.3",
     "@tailwindcss/postcss": "^4.1.8",
+    "@worldcoin/idkit": "^2.2.1",
     "@worldcoin/minikit-js": "^1.9.5",
     "@worldcoin/minikit-react": "^1.9.6",
     "eslint-config-next": "^15.3.3",
