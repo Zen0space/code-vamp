@@ -2,18 +2,18 @@
   # Build command for Next.js
   command = "npm run build"
   
-  # Use default Next.js output directory (.next) instead of custom dist
-  # publish = "dist"
+  # Publish directory (Next.js builds to dist with distDir config)
+  publish = "dist"
   
   # Node.js version
   environment = { NODE_VERSION = "20" }
 
-# Netlify Next.js plugin for API routes support
+# Netlify Next.js plugin for static site generation
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [build.processing]
-  # Let Next.js handle optimization
+  # Let Next.js handle optimization for static export
   skip_processing = false
 
 [build.processing.css]
@@ -61,10 +61,16 @@
   port = 3000
   autoLaunch = false
 
-# Functions settings for NextAuth API routes
+# Functions settings for custom NextAuth function
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# Redirect API auth routes to our custom function
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/.netlify/functions/nextauth/:splat"
+  status = 200
 
 # Form handling (if you add contact forms later)
 [forms]
