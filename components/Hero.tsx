@@ -29,12 +29,17 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25">
-              Start Your Journey
-            </button>
-            <button className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
-              Watch Demo
-            </button>
+            <div className="text-center">
+              <p className="text-gray-400 text-sm mb-4">Verify your humanity to start learning</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25">
+                  Start Your Journey
+                </button>
+                <button className="border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                  Watch Demo
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Stats */}

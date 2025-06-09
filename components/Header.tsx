@@ -1,6 +1,11 @@
 
+import React from 'react'
+import { useVerification } from '../utils/VerificationContext'
+import WorldIDVerification from './WorldIDVerification'
 
 const Header = () => {
+  const { isVerified, clearVerification } = useVerification()
+
   return (
     <header className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,18 +34,38 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* CTA Button */}
+          {/* Verification Status */}
           <div className="hidden md:block">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-              Get Started
-            </button>
+            {isVerified ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-green-400 text-sm font-medium">✓ Verified Human</span>
+                <button 
+                  onClick={clearVerification}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+                >
+                  Clear
+                </button>
+              </div>
+            ) : (
+              <WorldIDVerification />
+            )}
           </div>
 
-          {/* Mobile CTA Button - visible on mobile */}
+          {/* Mobile Verification */}
           <div className="md:hidden">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
-              Get Started
-            </button>
+            {isVerified ? (
+              <div className="flex items-center space-x-2">
+                <span className="text-green-400 text-xs">✓ Verified</span>
+                <button 
+                  onClick={clearVerification}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded-lg font-medium transition-colors text-xs"
+                >
+                  Clear
+                </button>
+              </div>
+            ) : (
+              <WorldIDVerification />
+            )}
           </div>
         </div>
       </div>
