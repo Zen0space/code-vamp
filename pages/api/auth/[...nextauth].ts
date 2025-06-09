@@ -6,6 +6,11 @@ export const authOptions: NextAuthOptions = {
   // Required secret for production
   secret: process.env.NEXTAUTH_SECRET,
   
+  // Set the site URL for production
+  ...(process.env.NEXTAUTH_URL && { 
+    url: process.env.NEXTAUTH_URL 
+  }),
+  
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     {
@@ -34,7 +39,18 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
   },
-  debug: true,
+  // Only enable debug in development
+  debug: process.env.NODE_ENV === "development",
+  
+  // Configure session strategy
+  session: {
+    strategy: "jwt",
+  },
+  
+  // Configure pages for better error handling
+  pages: {
+    error: '/auth/error', // Error code passed in query string as ?error=
+  },
 };
 
 export default NextAuth(authOptions); 

@@ -63,10 +63,16 @@
   port = 3000
   autoLaunch = false
 
-# Functions settings (if you add serverless functions later)
+# Functions settings for NextAuth API routes
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  
+# Ensure API routes work properly
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 # Form handling (if you add contact forms later)
 [forms]
