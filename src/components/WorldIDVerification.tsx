@@ -36,13 +36,9 @@ const WorldIDVerification = () => {
       {({ open }) => (
         <button 
           onClick={open}
-          className="group relative bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/30 border border-red-500/50"
+          className="bg-red-gradient text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-105 shadow-md hover:shadow-red-500/25"
         >
-          <span className="relative z-10 flex items-center">
-            <span className="mr-2">🌍</span>
-            Verify with World ID
-          </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+          Sign in with World ID
         </button>
       )}
     </IDKitWidget>

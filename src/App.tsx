@@ -1,10 +1,8 @@
-
 import { MiniKit } from '@worldcoin/minikit-js'
 import { VerificationProvider } from './utils/VerificationContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Features from './components/Features'
-import Footer from './components/Footer'
 import BottomNavigation from './components/BottomNavigation'
 
 // Initialize MiniKit for World App integration
@@ -15,13 +13,12 @@ if (typeof window !== 'undefined') {
 function App() {
   return (
     <VerificationProvider>
-      <div className="min-h-screen bg-gray-950 text-white">
+      <div className="min-h-screen bg-navy-950 text-white">
         <Header />
-        <main className="pb-24 md:pb-0">
+        <main className="pb-20">
           <Hero />
           <Features />
         </main>
-        <Footer />
         <BottomNavigation />
       </div>
     </VerificationProvider>
