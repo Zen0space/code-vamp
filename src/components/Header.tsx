@@ -1,5 +1,5 @@
 
-import React from 'react'
+
 import { useVerification } from '../utils/VerificationContext'
 import WorldIDVerification from './WorldIDVerification'
 

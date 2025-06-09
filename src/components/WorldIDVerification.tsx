@@ -1,5 +1,5 @@
 import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit'
-import { verify } from '../utils/verify'
+import { verify } from '../api/verify'
 import { useVerification } from '../utils/VerificationContext'
 
 interface WorldIDVerificationProps {
@@ -34,8 +34,8 @@ export default function WorldIDVerification({ onSuccess, onError }: WorldIDVerif
 
   return (
     <IDKitWidget
-      app_id={process.env.NEXT_PUBLIC_WLD_APP_ID as `app_${string}`} // Your app ID from Developer Portal
-      action={process.env.NEXT_PUBLIC_WLD_ACTION!} // Your action identifier
+      app_id={import.meta.env.VITE_PUBLIC_WLD_APP_ID as `app_${string}`} // Your app ID from Developer Portal
+      action={import.meta.env.VITE_PUBLIC_WLD_ACTION!} // Your action identifier
       onSuccess={handleSuccess}
       handleVerify={handleVerify}
       verification_level={VerificationLevel.Orb} // or VerificationLevel.Device for testing
