@@ -1,5 +1,7 @@
 import React from 'react';
 import WorldIDVerification from './WorldIDVerification';
+import BiometricInfo from './BiometricInfo';
+import WorldIDFaceAuth from './WorldIDFaceAuth';
 
 const Hero: React.FC = () => {
   return (
@@ -33,10 +35,20 @@ const Hero: React.FC = () => {
           <WorldIDVerification />
         </div>
         
+        {/* Biometric Info Panel */}
+        <div className="mb-8 slide-up max-w-2xl mx-auto">
+          <BiometricInfo />
+        </div>
+        
+        {/* World ID Face Authentication Panel */}
+        <div className="mb-12 slide-up max-w-3xl mx-auto">
+          <WorldIDFaceAuth />
+        </div>
+        
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 slide-up">
-          <button className="px-10 py-4 bg-red-gradient text-white font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-red-500/25 glow-effect">
-            Start Your Journey
-          </button>
+          <div className="flex justify-center">
+            <WorldIDVerification />
+          </div>
           <button className="px-10 py-4 glass-effect text-navy-200 font-semibold rounded-xl hover:bg-navy-700/50 transition-all duration-300 border border-navy-600">
             ▶ Watch Demo
           </button>

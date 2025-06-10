@@ -115,6 +115,31 @@
   animation: var(--animate-glow);
 }
 
+/* Animation delay utilities for floating blur orbs */
+@utility animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+@utility animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+@utility animation-delay-1500 {
+  animation-delay: 1.5s;
+}
+
+@utility animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+@utility animation-delay-2500 {
+  animation-delay: 2.5s;
+}
+
+@utility animation-delay-3000 {
+  animation-delay: 3s;
+}
+
 /* Navy + Red gradient utilities - matching screenshot */
 @utility bg-dark-gradient {
   background: linear-gradient(135deg, var(--color-navy-950), var(--color-navy-900));
