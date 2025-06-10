@@ -1,5 +1,4 @@
 import { MiniKit, VerifyCommandInput, ResponseEvent, VerificationLevel } from '@worldcoin/minikit-js'
-import { isFaceIDAvailable } from './deviceDetection'
 
 export interface MiniKitVerificationResult {
   merkle_root: string
@@ -40,15 +39,10 @@ export function initializeMiniKitVerification(
 }
 
 /**
- * Get the optimal verification level based on device capabilities
+ * Get the optimal verification level - always use Orb for maximum security
  */
 export function getOptimalVerificationLevel(): VerificationLevel {
-  // If Face ID is available, use Device verification for better UX
-  if (isFaceIDAvailable()) {
-    return VerificationLevel.Device
-  }
-  
-  // Default to Orb verification for maximum security
+  // Always use Orb verification for maximum security and World ID Face Auth compatibility
   return VerificationLevel.Orb
 }
 
@@ -83,17 +77,13 @@ export async function triggerWorldIDVerification(
 }
 
 /**
- * Trigger World ID verification specifically with Face ID (Device level)
+ * Trigger World ID verification with Orb level (for World ID Face Auth compatibility)
  */
-export async function triggerFaceIDVerification(
+export async function triggerOrbVerification(
   action: string,
   signal?: string
 ): Promise<void> {
-  if (!isFaceIDAvailable()) {
-    throw new Error('Face ID is not available on this device')
-  }
-  
-  return triggerWorldIDVerification(action, signal, VerificationLevel.Device)
+  return triggerWorldIDVerification(action, signal, VerificationLevel.Orb)
 }
 
  

@@ -1,22 +1,15 @@
 import { useVerification } from '../utils/VerificationContext'
 import { useEffect, useState } from 'react'
-import { initializeMiniKitVerification, triggerWorldIDVerification, getOptimalVerificationLevel } from '../utils/minikit'
-import { getPreferredBiometricMethod, isInWorldApp } from '../utils/deviceDetection'
+import { initializeMiniKitVerification, triggerWorldIDVerification } from '../utils/minikit'
 import { isFaceAuthAvailable, simulateFaceAuthCheck } from '../utils/worldIdFaceAuth'
-import { VerificationLevel } from '@worldcoin/minikit-js'
 
 const WorldIDVerification = () => {
   const { setVerified, isVerified, verificationData } = useVerification()
-  const [biometricMethod, setBiometricMethod] = useState<'face' | 'touch' | 'none'>('none')
-  const [verificationLevel, setVerificationLevel] = useState<VerificationLevel>(VerificationLevel.Orb)
   const [worldIdFaceAuth, setWorldIdFaceAuth] = useState(false)
   const [isFaceAuthLoading, setIsFaceAuthLoading] = useState(false)
 
   useEffect(() => {
-    // Detect biometric capabilities
-    const method = getPreferredBiometricMethod()
-    setBiometricMethod(method)
-    setVerificationLevel(getOptimalVerificationLevel())
+    // Initialize MiniKit verification
 
     initializeMiniKitVerification(
       (result) => {
@@ -50,30 +43,9 @@ const WorldIDVerification = () => {
       )
     } catch (error) {
       console.error('Failed to trigger World ID verification:', error)
-      // Show user-friendly error if not in World App
-      if (!isInWorldApp()) {
-        alert('This app must be opened in World App to verify your World ID.')
-      }
+      // Show user-friendly error
+      alert('Failed to verify World ID. Please make sure you are using World App.')
     }
-  }
-
-  const getButtonText = () => {
-    // Always show World ID sign in for initial verification
-    // Face Auth will be available after verification
-    if (biometricMethod === 'face') {
-      return '👤 Sign in with World ID'
-    } else if (biometricMethod === 'touch') {
-      return '👆 Sign in with World ID'
-    } else {
-      return 'Sign in with World ID'
-    }
-  }
-
-  const getVerificationTypeText = () => {
-    if (verificationLevel === VerificationLevel.Device) {
-      return biometricMethod === 'face' ? 'Device + Face ID' : 'Device Verification'
-    }
-    return 'Orb Verification'
   }
 
   const handleVerifiedClick = async () => {
@@ -129,7 +101,7 @@ const WorldIDVerification = () => {
             ? 'Processing Face Authentication...' 
             : worldIdFaceAuth 
               ? 'Click to use Face Auth' 
-              : getVerificationTypeText()
+              : 'Orb Verification'
           }
         </span>
       </div>
@@ -142,10 +114,10 @@ const WorldIDVerification = () => {
         onClick={handleVerify}
         className="bg-red-gradient text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 hover:scale-105 shadow-md hover:shadow-red-500/25"
       >
-        {getButtonText()}
+        Sign in with World ID
       </button>
       <span className="text-xs text-navy-400 opacity-75">
-        {biometricMethod !== 'none' ? getVerificationTypeText() : 'Face Auth available after Orb verification'}
+        Face Auth available after Orb verification
       </span>
     </div>
   )
